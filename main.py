@@ -1,10 +1,8 @@
-#from speech_synthesis import synthesis_speech
 import openai 
 import speech_recognition as sr
 from dotenv import load_dotenv
 import os
 import azure.cognitiveservices.speech as speechsdk
-
 
 load_dotenv()
 
@@ -41,7 +39,7 @@ if __name__ == "__main__":
         model="text-davinci-003",
         prompt=user_question,
         temperature=0,
-        max_tokens=256,
+        max_tokens=1000,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0,
@@ -49,6 +47,6 @@ if __name__ == "__main__":
     )
 
     response_text = response.choices[0].text
-
     print(response_text)
+    print("Total Tokens Consumed: {}".format(response.usage.total_tokens))
     synthesis_speech(response_text)
