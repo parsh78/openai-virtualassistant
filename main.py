@@ -35,18 +35,26 @@ def prompt_to_listen(recognizer, prompt):
         print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
     if len(user_question) > 0:
-        response = openai.Completion.create(
-            model="text-davinci-003",
-            prompt=user_question,
-            temperature=0,
-            max_tokens=250, #You can go upto 4000, it impacts cost
-            top_p=1,
-            frequency_penalty=0,
-            presence_penalty=0,
-            stop=None
+        # response = openai.Completion.create(
+        #     model="text-davinci-003",
+        #     prompt=user_question,
+        #     temperature=0,
+        #     max_tokens=250, #You can go upto 4000, it impacts cost
+        #     top_p=1,
+        #     frequency_penalty=0,
+        #     presence_penalty=0,
+        #     stop=None
+        # )
+        #response_text = response.choices[0].text
+
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages = [{"role": "assistant", "content": user_question}]
+           
         )
 
-        response_text = response.choices[0].text
+        response_text = response.choices[0].message.content
+        
         print(f"{response_text}")
         print(f"\nTotal Tokens Consumed: {response.usage.total_tokens}")
         synthesize_speech(response_text)
