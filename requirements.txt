@@ -27,9 +27,10 @@ requests==2.32.4
 speech-synthesis==1.4
 SpeechRecognition==3.9.0
 tokenizers==0.13.2
-torch==2.6.0
+torch==2.11.0
 tqdm==4.66.3
-transformers==5.4.0
+requests==2.33.0
+filelock==3.25.2
 typing_extensions==4.4.0
 urllib3==2.6.3
 yarl==1.8.2
